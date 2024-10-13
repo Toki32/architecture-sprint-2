@@ -2,7 +2,7 @@
 docker compose up -d
 ```
 
-# Инициализация configSrv (script/configSrv-init.sh):
+# Инициализация configSrv:
 
 ```shell
 docker exec -it configSrv mongosh --port 27017
@@ -20,28 +20,28 @@ docker exec -it configSrv mongosh --port 27017
 ```
 
 
-# Инициализация shard1, shard2 (script/shard1-init.sh и script/shard2-init.sh):
+# Инициализация shard1, shard2:
 
 ```shell
-docker exec -it shard1 mongosh --port 27018
+docker exec -it shard1 mongosh --port 27011
 
 > rs.initiate(
     {
       _id : "shard1",
       members: [
-        { _id : 0, host : "shard1:27018" },
+        { _id : 0, host : "shard1:27011" },
       ]
     }
 );
 > exit();
 
-docker exec -it shard2 mongosh --port 27019
+docker exec -it shard2 mongosh --port 27021
 
 > rs.initiate(
     {
       _id : "shard2",
       members: [
-        { _id : 1, host : "shard2:27019" }
+        { _id : 1, host : "shard2:27021" }
       ]
     }
   );
@@ -53,8 +53,8 @@ docker exec -it shard2 mongosh --port 27019
 ```shell
 docker exec -it mongos_router mongosh --port 27020
 
-> sh.addShard( "shard1/shard1:27018");
-> sh.addShard( "shard2/shard2:27019");
+> sh.addShard( "shard1/shard1:27011");
+> sh.addShard( "shard2/shard2:27021");
 
 > sh.enableSharding("somedb");
 > sh.shardCollection("somedb.helloDoc", { "name" : "hashed" } )
@@ -70,12 +70,12 @@ docker exec -it mongos_router mongosh --port 27020
 # Проверка addData.sh (script/check_shard1.sh и script/check_shard2.sh)
 
 ```shell
-docker exec -it shard1 mongosh --port 27018
+docker exec -it shard1 mongosh --port 27011
  > use somedb;
  > db.helloDoc.countDocuments();
  > exit(); 
 
- docker exec -it shard2 mongosh --port 27019
+ docker exec -it shard2 mongosh --port 27021
  > use somedb;
  > db.helloDoc.countDocuments();
  > exit(); 
