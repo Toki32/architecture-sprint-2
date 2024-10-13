@@ -34,7 +34,7 @@ services:
     container_name: shard1
     restart: always
     ports:
-      - "27018:27018"
+      - "27011:27011"
     networks:
       app-network:
     volumes:
@@ -46,7 +46,7 @@ services:
         "shard1",
         "--bind_ip_all",
         "--port",
-        "27018"
+        "27011"
       ]
     healthcheck:
       test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
@@ -59,7 +59,7 @@ services:
     container_name: shard2
     restart: always
     ports:
-      - "27019:27019"
+      - "27021:27021"
     networks:
       app-network:
     volumes:
@@ -71,7 +71,7 @@ services:
         "shard2",
         "--bind_ip_all",
         "--port",
-        "27019"
+        "27021"
       ]
     healthcheck:
       test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
