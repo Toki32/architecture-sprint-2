@@ -41,7 +41,7 @@ docker exec -it shard2 mongosh --port 27021
     {
       _id : "shard2",
       members: [
-        { _id : 1, host : "shard2:27021" }
+        { _id : 1, host : "shard2:27021" },
       ]
     }
   );
