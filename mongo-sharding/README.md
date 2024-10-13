@@ -48,7 +48,7 @@ docker exec -it shard2 mongosh --port 27021
 > exit();
 ```
 
-# Инцициализация роутера и наполнение его тестовыми данными (script/addData.sh):
+# Инцициализация роутера и наполнение его тестовыми данными:
 
 ```shell
 docker exec -it mongos_router mongosh --port 27020
@@ -67,7 +67,7 @@ docker exec -it mongos_router mongosh --port 27020
 > exit(); 
 ```
 
-# Проверка addData.sh (script/check_shard1.sh и script/check_shard2.sh)
+# Проверка
 
 ```shell
 docker exec -it shard1 mongosh --port 27011
