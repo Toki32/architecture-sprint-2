@@ -36,7 +36,7 @@ services:
     networks:
       app-network:
     volumes:
-      - shard1data:/data/db
+      - shard1-data:/data/db
     command:
       [
         "--shardsvr",
@@ -111,7 +111,7 @@ services:
     networks:
       app-network:
     volumes:
-      - shard2data:/data/db
+      - shard2-data:/data/db
     command:
       [
         "--shardsvr",
@@ -225,9 +225,9 @@ networks:
 
 volumes:
   config-data:
-  shard1data:
+  shard1-data:
   shard1-2-data:
   shard1-3-data:
-  shard2data:
+  shard2-data:
   shard2-2-data:
   shard2-3-data:
